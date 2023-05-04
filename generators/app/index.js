@@ -4,37 +4,37 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
-  prompting() {
-    // Have Yeoman greet the user.
-    this.log(
-      yosay(
-        `Welcome to the astonishing ${chalk.red('generator-automate')} generator!`
-      )
-    );
 
-    const prompts = [
-      {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
-      }
-    ];
+    prompting() {
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
-  }
+        this.log(
+            yosay(
+                `Welcome to ${chalk.blue('automate')} generator! 
+                Create test automation projects for E2E tests. Test Frameworks supported: ${chalk.green('Selenium')}`
+            )
+        );
 
-  writing() {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
-  }
+        const prompts = [
+            {
+                type: 'list',
+                name: 'framework',
+                message: 'Select a framework:',
+                choices: [
+                    {
+                        name: 'Selenium',
+                        value: 'selenium',
+                    }
+                ]
+            }
+        ];
 
-  install() {
-    this.installDependencies();
-  }
+        return this.prompt(prompts).then(props => {
+            this.props = props;
+        });
+    }
+
+    intializing() {
+        this.composeWith(require.resolve(`../${this.props.framework}`));
+    }
+
 };
