@@ -13,7 +13,7 @@ module.exports = class extends Generator {
             )
         );
 
-        const defaultPrompt = [
+        const defaultPrompts = [
             {
                 type: 'confirm',
                 name: 'isNewProject',
@@ -22,7 +22,7 @@ module.exports = class extends Generator {
             }
         ];
 
-        const projectConfigPrompt = [
+        const projectConfigPrompts = [
             {
                 type: 'input',
                 name: 'projectName',
@@ -33,15 +33,44 @@ module.exports = class extends Generator {
                 name: 'projectPath',
                 message: 'What is the path to the project?',
                 default: __dirname
+            },
+            {
+                type: 'checkbox',
+                name: 'buildAutomation',
+                message: 'Choose the build automation:',
+                choices: [
+                    { name: 'Maven', value: 'maven' },
+                    { name: 'Gradle', value: 'gradle' },
+                ]
+            },
+            {
+                type: 'checkbox',
+                name: 'framework',
+                message: 'Choose the framework:',
+                choices: [
+                    { name: 'JUnit', value: 'junit' },
+                    { name: 'TestNG', value: 'testNG' },
+                ]
+            },
+            {
+                type: 'checkbox',
+                name: 'report',
+                message: 'Choose the reporter:',
+                choices: [
+                    { name: 'TestNG Reporter', value: 'testNGReporter' },
+                    { name: 'Allure Report', value: 'allureReport' },
+                ]
             }
         ];
 
-        return this.prompt(defaultPrompt).then(props => {
+        return this.prompt(defaultPrompts).then(props => {
             this.defaultProps = props;
             if (this.defaultProps.isNewProject) {
-                return this.prompt(projectConfigPrompt).then(props2 => {
+                return this.prompt(projectConfigPrompts).then(props2 => {
                     this.projectConfigProps = props2;
                 });
+            } else {
+                console.log('Ok, there is no other option to choose beside this. Tks!');
             }
         });
     }
@@ -50,14 +79,13 @@ module.exports = class extends Generator {
         if (this.projectConfigProps !== undefined) {
             console.log(`New project name: ${this.projectConfigProps.projectName}`);
             console.log(`New project path: ${this.projectConfigProps.projectPath}`);
+            console.log(`New project build automation: ${this.projectConfigProps.buildAutomation}`);
+            console.log(`New project build framework: ${this.projectConfigProps.framework}`);
+            console.log(`New project build report tool: ${this.projectConfigProps.report}`);
         }
-        // this.fs.copy(
-        //     this.templatePath('dummyfile.txt'),
-        //     this.destinationPath('dummyfile.txt')
-        // );
     }
 
     install() {
-        // this.installDependencies();
+        // TODO document this is not ready yet
     }
 };
