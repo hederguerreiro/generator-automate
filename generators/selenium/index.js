@@ -41,15 +41,17 @@ module.exports = class extends Generator {
                 choices: [
                     { name: 'Maven', value: 'maven' },
                     { name: 'Gradle', value: 'gradle' },
+                    { name: 'None', value: 'none', checked: true },
                 ]
             },
             {
                 type: 'checkbox',
                 name: 'framework',
-                message: 'Choose the framework:',
+                message: 'Choose the Test Framework:',
                 choices: [
                     { name: 'JUnit', value: 'junit' },
                     { name: 'TestNG', value: 'testNG' },
+                    { name: 'No test framework', value: 'none', checked: true},
                 ]
             },
             {
@@ -59,6 +61,7 @@ module.exports = class extends Generator {
                 choices: [
                     { name: 'TestNG Reporter', value: 'testNGReporter' },
                     { name: 'Allure Report', value: 'allureReport' },
+                    { name: 'No reporter tool', value: 'none', checked: true },
                 ]
             }
         ];
