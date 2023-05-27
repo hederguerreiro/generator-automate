@@ -38,13 +38,14 @@ jobs:
 
       - name: Run tests
         run: npm test
-  # deploy to heroku
+  
+        # deploy to heroku
   automate-deploy-heroku1:
     runs-on: ubuntu-latest
     needs: [automate-job1]
     steps:
-      - name: Heroku Action
-        uses: CDNievas/heroku-action@v1.0
+      - name: Deploy to Heroku
+        uses: AkhileshNS/heroku-deploy@v3.12.14
         with:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
