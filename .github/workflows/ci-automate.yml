@@ -25,13 +25,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Check repository
+        uses: actions/checkout@v2
       
-      - name: Configure git for a user
-        uses: dawidd6/action-git-user-config@v1.0.0
-        with:
-          username: hederguerreiro
-        
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2.5.2
         with:
