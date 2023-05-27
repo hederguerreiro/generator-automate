@@ -46,6 +46,6 @@ jobs:
       - name: Heroku Build
         uses: behe/heroku-build@v1.2
         with:
-          app-name: ${{secrets.HEROKU_API_KEY}}
-          api-key: ${{secrets.HEROKU_APP_NAME}}
+          api-key: ${{secrets.HEROKU_API_KEY}}
+          app-name: ${{secrets.HEROKU_APP_NAME}}
           
