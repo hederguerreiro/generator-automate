@@ -6,7 +6,7 @@
   "author": {
     "name": "H. J. Guerreiro",
     "email": "heder.guerreiro@gmail.com",
-    "url": ""
+    "url": "https://github.com/hederguerreiro/generator-automate"
   },
   "files": [
     "generators"
@@ -17,7 +17,8 @@
     "tests",
     "e2e",
     "unit tests",
-    "yeoman-generator"
+    "yeoman-generator",
+    "JAVA"
   ],
   "devDependencies": {
     "yeoman-test": "^1.7.0",
