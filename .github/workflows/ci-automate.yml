@@ -42,7 +42,7 @@ jobs:
         # deploy to heroku
   automate-deploy-heroku1:
     runs-on: ubuntu-latest
-    needs: automate-job1
+    needs: [automate-job1]
     steps:
       - name: Deploy to Heroku
         uses: AkhileshNS/heroku-deploy@v3.12.14
@@ -50,5 +50,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          branch: master
+          appdir: generator-automate 
           
