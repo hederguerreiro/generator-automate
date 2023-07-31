@@ -43,7 +43,7 @@ module.exports = class extends Generator {
       }
     ];
 
-    const projectConfigPrompts = [
+    const projectPrompts = [
       {
         type: "input",
         name: "projectName",
@@ -88,28 +88,26 @@ module.exports = class extends Generator {
     ];
 
     return this.prompt(defaultPrompts).then(props => {
-      this.defaultProps = props;
-      if (this.defaultProps.isNewProject) {
-        return this.prompt(projectConfigPrompts).then(props2 => {
-          this.projectConfigProps = props2;
+      this.props = props;
+      if (this.props.isNewProject) {
+        return this.prompt(projectPrompts).then(projectProps => {
+          this.projectProps = projectProps;
         });
       }
     });
   }
 
   writing() {
-    if (this.projectConfigProps !== undefined) {
-      console.log(`New project name: ${this.projectConfigProps.projectName}`);
-      console.log(`New project path: ${this.projectConfigProps.projectPath}`);
+    if (this.projectProps !== undefined) {
+      console.log(`New project name: ${this.projectProps.projectName}`);
+      console.log(`New project path: ${this.projectProps.projectPath}`);
       console.log(
-        `New project build automation: ${this.projectConfigProps.buildAutomation}`
+        `New project build automation: ${this.projectProps.buildAutomation}`
       );
       console.log(
-        `New project build framework: ${this.projectConfigProps.framework}`
+        `New project build framework: ${this.projectProps.framework}`
       );
-      console.log(
-        `New project build report tool: ${this.projectConfigProps.report}`
-      );
+      console.log(`New project build report tool: ${this.projectProps.report}`);
     }
   }
 
